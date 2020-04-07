@@ -1,0 +1,21 @@
+<header>
+<nav>
+    <ul>
+{{#if sessuser}}
+        <li><a href="/profile">Colleagues</a> </li>
+        {{else}}
+        <li><a href="/">Colleagues</a> </li>
+        <li class="menu"><a href="/register">Registrera dig här</a> </li>
+        {{/if}}
+    </ul>
+</nav>
+
+{{#if sessuser}}
+<div id="signout">
+<form action="/logout" method="POST">
+<input type="hidden" name="_csrf" value="{{csrfToken}}">
+<button type="submit" >Sign out</button>
+</form>
+</div>
+{{/if}}
+</header>

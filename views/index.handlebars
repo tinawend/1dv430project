@@ -1,0 +1,11 @@
+<div class="loginform">
+    <p>Log in:</p>
+    <form action="/" method="POST">
+        <input name="username" id='username' placeholder="username" required>
+        <br>
+        <input name="password" id='password' type="password" placeholder="password" required>
+        <br>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <button type="submit">Sign in</button>
+    </form>
+</div>

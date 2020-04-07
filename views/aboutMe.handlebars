@@ -1,0 +1,9 @@
+
+<form action="/profile/aboutMe/{{id}}" method="POST">
+<input id='name' name='name' placeholder='Title' value={{name}}>
+<br>
+<input id='age' name='age' value={{age}}>
+<br>
+<input type="hidden" name="_csrf" value="{{csrfToken}}">
+<button type="submit">Send</button>
+</form>
