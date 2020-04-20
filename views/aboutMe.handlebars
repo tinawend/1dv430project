@@ -1,8 +1,8 @@
 
 <form action="/profile/aboutMe/{{id}}" method="POST">
-<input id='name' name='name' placeholder='Title' value={{name}}>
+<input id='name' name='name' placeholder='Name' value={{name}}>
 <br>
-<input id='age' name='age' value={{age}}>
+<input type="number" placeholder="Age" id='age' name='age' value={{age}}>
 <br>
 <input type="hidden" name="_csrf" value="{{csrfToken}}">
 <button type="submit">Send</button>

@@ -35,8 +35,14 @@ authenticate.getLogin = (req, res) => {
 
 authenticate.login = async (req, res) => {
   const user = await User.findOne({ username: req.body.username })
-  const compare = await user.comparePassword(req.body.password)
   if (!user) {
+    req.session.flash = {
+      message: 'No access'
+    }
+    res.redirect('/')
+  }
+  const compare = await user.comparePassword(req.body.password)
+  if (user && !compare) {
     req.session.flash = {
       message: 'No access'
     }

@@ -14,9 +14,9 @@
     {{/each}}
 {{else}}
 <form id="addprofile" action="/profile" method="POST">
-<input id='name' name='name' placeholder='name'>
+<input id='name' name='name' placeholder='Name' type="text">
 <br>
-<input id='age' name='age'>
+<input id='age' name='age' placeholder="Age" type="number">
 <br>
 <input type="hidden" name="_csrf" value="{{csrfToken}}">
 <button type="submit">Send</button>
