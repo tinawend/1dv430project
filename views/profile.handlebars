@@ -1,11 +1,11 @@
-
+<div id="profile">
 {{#if sessuser}}
 <h1>Välkommen {{sessuser.username}}</h1>
 <p>lägg till information om dig!</p>
 {{#if usersprofile}}
 {{#each usersprofile}}
-<p>{{name}}</p>
-<p>{{age}}</p>
+<p>Namn: {{name}}</p>
+<p>Ålder: {{age}} år</p>
     <form id="editbutton" action="/profile/aboutMe/{{id}}" method="GET">
     <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <button type="submit">Ändra</button>
@@ -24,3 +24,4 @@
 {{/if}}
 
    {{/if}}
+</div>

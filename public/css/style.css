@@ -72,6 +72,7 @@ color: #ff5bb0;
     background-repeat: no-repeat;
     border: solid 2px #ff5bb0;
     border-radius: 4px;
+    box-shadow: 10px 10px rgba(82, 80, 80, 0.274);
     
 }
 
@@ -93,4 +94,18 @@ color: #ff5bb0;
     cursor: pointer;
     color: #ff5bb0;
     font-size: 15px;
+}
+
+#profile {
+    text-align: left;
+}
+
+#profile button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+#profile button:hover {
+color: #ff5bb0;
 }
