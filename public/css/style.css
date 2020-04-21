@@ -40,6 +40,7 @@ nav	a:hover, nav a:active {
     color: #ff5bb0;
 }
 
+
 #signout{
     margin-right: 50px;
     float: right;
@@ -52,7 +53,7 @@ nav	a:hover, nav a:active {
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 #signout button:hover {
-color: #ff5bb0;
+    color: #ff5bb0;
 }
 
 .menu{
@@ -60,7 +61,7 @@ color: #ff5bb0;
     font-size: 15px;
     letter-spacing: 1px;
     margin-top: 30px;
-
+    
 }
 .loginform {
     color: whitesmoke;
@@ -109,3 +110,14 @@ color: #ff5bb0;
 #profile button:hover {
 color: #ff5bb0;
 }
+
+@media screen and (max-width: 400px) {
+    nav ul li {
+    float: none;
+    font-size: 10px;
+    }
+    .menu {
+        float: none;
+        font-size: 10px; 
+    }
+  }
