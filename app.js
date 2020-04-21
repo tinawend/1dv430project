@@ -39,10 +39,10 @@ const SESS_NAME = 'sid'
 
 app.use(session({
   name: SESS_NAME,
-  secret: 'keyboard cat',
+  secret: 'eiidnnkjnjbhgvhvj',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false }
+  cookie: { secure: true }
 }))
 
 app.use(csrf())
