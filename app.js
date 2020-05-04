@@ -52,6 +52,7 @@ app.use((req, res, next) => {
   delete req.session.flash
   next()
 })
+app.use('/scripts', express.static(`${__dirname}/node_modules/`))
 
 app.use('/', router)
 app.set('port', port)

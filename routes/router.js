@@ -4,6 +4,9 @@ const loggedIn = require('../middleware/middleware').isUserLoggedIn
 const notSignedIn = require('../middleware/middleware').notAlreadyLogged
 const authenticate = require('../controllers/signIncontroller')
 const profile = require('../controllers/profileController')
+const video = require('../controllers/videoController')
+
+router.get('/videoChat', video.getVideo)
 
 router.get('/register', notSignedIn, authenticate.getregister)
 

@@ -4,6 +4,8 @@ body {
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     text-align: center;
 }
+html { margin-top: 100px; }
+#chat-content { height: 180px;  overflow-y: scroll; }
 
 header {
     position: absolute;
@@ -69,7 +71,7 @@ nav	a:hover, nav a:active {
     text-align: center;
     width: 300px;
     height: 250px;
-    background-image: url('../pics/colorpic.jpg');
+    background-image: url('../images/colorpic.jpg');
     background-repeat: no-repeat;
     border: solid 2px #ff5bb0;
     border-radius: 4px;
@@ -121,3 +123,9 @@ color: #ff5bb0;
         font-size: 10px; 
     }
   }
+
+/* 
+  .ui .image {
+width: 200px;
+height: 200px;
+  } */
