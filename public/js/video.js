@@ -1,157 +1,96 @@
+const socket = window.io()
 
-// const Handlebars = require('express-handlebars')
-// const SimpleWebRTC = require('simplewebrtc')
+socket.on('message', function (message) {
+  console.log('The server has a message for you: ' + message)
+})
 
-window.addEventListener('load', () => {
-  // Chat platform
-  const chatTemplate = $('#chat-template')
-  const chatContentTemplate = $('#chat-content-template')
-  const chatEl = $('#chat')
-  const formEl = $('.form')
-  const messages = []
-  let username
-
-  // Local Video
-  const localImageEl = $('#local-image')
-  const localVideoEl = $('#local-video')
-
-  // Remote Videos
-  const remoteVideoTemplate = $('#remote-video-template')
-  const remoteVideosEl = $('#remote-videos')
-  let remoteVideosCount = 0
-
-  // Hide cameras until they are initialized
-  localVideoEl.hide()
-
-  // Add validation rules to Create/Join Room Form
-  formEl.form({
-    fields: {
-      roomName: 'empty',
-      username: 'empty'
-    }
-  })
-
-  // create our webrtc connection
-  const webrtc = new SimpleWebRTC({
-    // the id/element dom element that will hold "our" video
-    localVideoEl: 'local-video',
-    // the id/element dom element that will hold remote videos
-    remoteVideosEl: 'remote-videos',
-    // immediately ask for camera access
-    autoRequestMedia: true,
-    debug: false,
-    detectSpeakingEvents: true,
-    autoAdjustMic: false
-  })
-
-  // We got access to local camera
-  webrtc.on('localStream', () => {
-    localImageEl.hide()
-    localVideoEl.show()
-  })
-
-  // Remote video was added
-  webrtc.on('videoAdded', (video, peer) => {
-    // eslint-disable-next-line no-console
-    const id = webrtc.getDomId(peer)
-    const html = remoteVideoTemplate({ id })
-    if (remoteVideosCount === 0) {
-      remoteVideosEl.html(html)
-    } else {
-      remoteVideosEl.append(html)
-    }
-    $(`#${id}`).html(video)
-    $(`#${id} video`).addClass('ui image medium') // Make video element responsive
-    remoteVideosCount += 1
-  })
-
-  // Update Chat Messages
-  const updateChatMessages = () => {
-    const html = chatContentTemplate({ messages })
-    const chatContentEl = $('#chat-content')
-    chatContentEl.html(html)
-    // automatically scroll downwards
-    const scrollHeight = chatContentEl.prop('scrollHeight')
-    chatContentEl.animate({ scrollTop: scrollHeight }, 'slow')
+function getLVideo (callbacks) {
+  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia
+  const constraints = {
+    audio: true,
+    video: true
   }
+  navigator.getUserMedia(constraints, callbacks.success, callbacks.error)
+}
 
-  // Post Local Message
-  const postMessage = (message) => {
-    const chatMessage = {
-      username,
-      message,
-      postedOn: new Date().toLocaleString('en-GB')
-    }
-    // Send to all peers
-    webrtc.sendToAll('chat', chatMessage)
-    // Update messages locally
-    messages.push(chatMessage)
-    $('#post-message').val('')
-    updateChatMessages()
+function recStream (stream, elemid) {
+  const video = document.querySelector(elemid)
+  video.srcObject = stream
+
+  window.peer_stream = stream
+}
+
+getLVideo({
+  success: function (stream) {
+    window.localStream = stream
+    recStream(stream, '#lvideo')
+  },
+  error: function (err) {
+    alert('cannot access your camera')
+    console.log(err)
   }
+})
 
-  // Display Chat Interface
-  const showChatRoom = (room) => {
-    formEl.hide()
-    const html = chatTemplate({ room })
-    chatEl.html(html)
-    const postForm = $('form')
-    postForm.form({
-      message: 'empty'
-    })
-    $('#post-btn').on('click', () => {
-      const message = $('#post-message').val()
-      postMessage(message)
-    })
-    $('#post-message').on('keyup', (event) => {
-      if (event.keyCode === 13) {
-        const message = $('#post-message').val()
-        postMessage(message)
-      }
-    })
-  }
+var conn
+var peerid
 
-  // Register new Chat Room
-  const createRoom = (roomName) => {
-    // eslint-disable-next-line no-console
-    console.info(`Creating new room: ${roomName}`)
-    webrtc.createRoom(roomName, name => {
-      formEl.form('clear')
-      showChatRoom(name)
-      postMessage(`${username} created chatroom`)
-    })
-  }
+var peer = new Peer({ key: 'lwjd5qra8257b9' })
 
-  // Join existing Chat Room
-  const joinRoom = (roomName) => {
-    // eslint-disable-next-line no-console
-    console.log(`Joining Room: ${roomName}`)
-    webrtc.joinRoom(roomName)
-    showChatRoom(roomName)
-    postMessage(`${username} joined chatroom`)
-  }
+peer.on('open', function () {
+  document.querySelector('#displayId').textContent = peer.id
+})
 
-  // Receive message from remote user
-  webrtc.connection.on('message', (data) => {
-    if (data.type === 'chat') {
-      const message = data.payload
-      messages.push(message)
-      updateChatMessages()
-    }
-  })
+peer.on('connection', function (connection) {
+  conn = connection
+  peerid = connection.peer
 
-  // Room Submit Button Handler
-  $('.submit').on('click', (event) => {
-    if (!formEl.form('is valid')) {
-      return false
-    }
-    username = $('#username').val()
-    const roomName = $('#roomName').val().toLowerCase()
-    if (event.target.id === 'create-btn') {
-      createRoom(roomName)
-    } else {
-      joinRoom(roomName)
-    }
+  document.querySelector('#connId').value = peerid
+})
+
+peer.on('error', function (err) {
+  alert('an error has happened:' + err)
+  console.log(err)
+})
+
+document.querySelector('#conn_button').addEventListener('click', function () {
+  peerid = document.querySelector('#connId').value
+
+  if (peerid) {
+    conn = peer.connect(peerid)
+  } else {
+    alert('enter an id')
     return false
+  }
+})
+
+peer.on('call', function (call) {
+  var acceptCall = confirm('Do you want to answer this call?')
+
+  if (acceptCall) {
+    call.answer(window.localStream)
+
+    call.on('stream', function (stream) {
+      window.peer_stream = stream
+
+      recStream(stream, '#rVideo')
+    })
+    call.on('close', function () {
+      alert('the call has ended')
+    })
+  } else {
+    console.log('call denied')
+  }
+})
+
+document.querySelector('#call_button').addEventListener('click', function () {
+  console.log('calling a peer' + peerid)
+  console.log(peer)
+
+  var call = peer.call(peerid, window.localStream)
+
+  call.on('stream', function (stream) {
+    window.peer_stream = stream
+
+    recStream(stream, '#rVideo')
   })
 })

@@ -1,9 +1,12 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
 const handlebar = require('express-handlebars')
 const session = require('express-session')
 const router = require('./routes/router')
+// const { ExpressPeerServer } = require('peer')
 const csrf = require('csurf')
 
 require('dotenv').config()
@@ -23,7 +26,15 @@ db.on('connected', () => {
   console.log('Opened conection')
 })
 
+// const peerServer = ExpressPeerServer(server, {
+//   debug: true,
+//   path: '/myapp'
+// })
+
+// app.use('/peerjs', peerServer)
+
 app.use(express.static('public'))
+// app.use('/scripts', express.static(`${__dirname}/node_modules/`))
 
 const hbs = handlebar.create({
   defaultLayout: 'main'
@@ -31,9 +42,11 @@ const hbs = handlebar.create({
 
 app.engine('handlebars', hbs.engine)
 app.set('view engine', 'handlebars')
-const port = process.env.PORT || '4000'
+
+const port = process.env.PORT || '9000'
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.set('socketio', io)
 
 const SESS_NAME = 'sid'
 
@@ -52,11 +65,15 @@ app.use((req, res, next) => {
   delete req.session.flash
   next()
 })
-app.use('/scripts', express.static(`${__dirname}/node_modules/`))
 
 app.use('/', router)
 app.set('port', port)
-app.listen(port, () => console.log(`API running on localhost:${port}`))
+server.listen(port, () => console.log(`API running on localhost:${port}`))
+
+io.on('connection', (socket) => {
+  console.log('connect')
+  socket.emit('message', 'You are connected!')
+})
 
 app.use((req, res, next) => {
   res.status(404).send('Not found')
