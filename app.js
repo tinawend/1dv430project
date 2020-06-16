@@ -69,7 +69,7 @@ app.use(session({
   secret: 'eiidnnkjnjbhgvhvj',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false }
+  cookie: { secure: true }
 }))
 
 app.use(csrf())
