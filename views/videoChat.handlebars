@@ -1,5 +1,31 @@
+{{!-- 
+
+        <div class="container" id="chat">
+  
+        <div id="chat-window">
+            <div id="output"></div>
+        </div>
+
+    <form class="form-sign">
+        <input id="handle" class="form-controll"  type="text" placeholder="name" />
+        <input id="message" class="form-controll" type="text" placeholder="message" />
+        <button id="submit" class="form-controll" >Send</button>
 
 
+    </form>
+
+
+    </div> --}}
+
+    <div id="message-container"></div>
+    <form id="send-container">
+      <input type="text" id="message-input">
+      <button type="submit" id="send-button">send</button>
+    </form>
+
+{{#if sessuser}}
+<input type="hidden" id="username" value="{{sessuser.username}}">
+{{/if}}
 <div class="container">
   <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -12,7 +38,17 @@
     </div>
   </div>
   <span id="displayId"></span>
-  <input type="text" id="connId" class="form-control" placeholder="enter a connection id" required>
-  <button id="conn_button" class="btn btn-lg btn-primary btn-block" type="submit">Connect</button>
-  <button id="call_button" class="btn btn-lg btn-success btn-block" type="submit">Call</button>
+  <div class="col-xs-2">
+  
+  <input type="text" id="connId"  placeholder="enter a connection id" required>
+  </div>
+  <br>
+  {{!-- <button id="conn_button" class="btn btn-lg btn-primary btn-block" type="submit">Connect</button> --}}
+  <button id="call_button" class="btn btn-lg btn-success" type="submit">Call</button>
 </div>
+
+{{!-- <script src="peer.min.js"></script>
+<script src="peerjs-groups.js"></script> --}}
+  <script src="https://cdn.jsdelivr.net/npm/peerjs@0.3.20/dist/peer.min.js"></script>
+  <script src="js/video.js"></script>
+<script src="js/chatt.js"></script>

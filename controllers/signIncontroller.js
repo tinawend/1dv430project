@@ -1,9 +1,14 @@
 const User = require('../models/users')
+const Profile = require('../models/profile')
 const authenticate = {}
 
-authenticate.getregister = (req, res) => {
+authenticate.getregister = async (req, res) => {
   const sessuser = req.session.user
-  res.render('register', { title: 'register', sessuser })
+  const allProfiles = await Profile.find({})
+  const profiles = allProfiles.map(users => ({
+    username: users.username
+  }))
+  res.render('register', { title: 'register', sessuser, profiles })
 }
 
 authenticate.register = async (req, res) => {
@@ -28,9 +33,13 @@ authenticate.register = async (req, res) => {
   })
 }
 
-authenticate.getLogin = (req, res) => {
+authenticate.getLogin = async (req, res) => {
   const sessuser = req.session.user
-  res.render('index', { title: 'home', sessuser })
+  const allProfiles = await Profile.find({})
+  const profiles = allProfiles.map(users => ({
+    username: users.username
+  }))
+  res.render('index', { title: 'home', sessuser, profiles })
 }
 
 authenticate.login = async (req, res) => {

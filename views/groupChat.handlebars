@@ -1,0 +1,36 @@
+{{!-- <div id="container">
+
+{{#if sessuser}}
+<input type="hidden" id="username" value="{{sessuser.username}}">
+{{/if}}
+
+    <video id="video1" playsinline autoplay muted></video>
+    <video id="video2" playsinline autoplay></video>
+    <video id="video3" playsinline autoplay></video>
+
+    <div>
+        <button id="startButton">Start</button>
+        <button id="callButton">Call</button>
+        <button id="hangupButton">Hang Up</button>
+    </div>
+
+   
+</div>  --}}
+
+<div id = 'selectRoom'>
+    {{!-- <label> Type the room nummber</label> --}}
+<input id="roomNumber" type="text" placeholder="enter a room id..."> 
+<button id="goRoom" class="btn btn-lg btn-success">Join</button>
+
+</div>
+
+<div id="consoultingRoom" style="display: none;">
+<video id="localVideo" autoplay></video>
+<video id="remoteVideo" autoplay></video>
+{{!-- <video id="remoteVideo1" autoplay></video> --}}
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/videos.js"></script>
+

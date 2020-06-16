@@ -1,8 +1,9 @@
-const socket = window.io()
 
-socket.on('message', function (message) {
-  console.log('The server has a message for you: ' + message)
-})
+// const socket = window.io()
+// // var Peer
+// socket.on('message', function (message) {
+//   console.log('The server has a message for you: ' + message)
+// })
 
 function getLVideo (callbacks) {
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia
@@ -26,7 +27,7 @@ getLVideo({
     recStream(stream, '#lvideo')
   },
   error: function (err) {
-    alert('cannot access your camera')
+    window.alert('cannot access your camera')
     console.log(err)
   }
 })
@@ -34,10 +35,12 @@ getLVideo({
 var conn
 var peerid
 
-var peer = new Peer({ key: 'lwjd5qra8257b9' })
+var peer = new Peer(document.querySelector('#username').value)
 
-peer.on('open', function () {
-  document.querySelector('#displayId').textContent = peer.id
+peer.on('open', function (req, res) {
+  console.log(document.querySelector('#username'))
+  // document.querySelector('#username').value
+  document.querySelector('#displayId').textContent = document.querySelector('#username').value
 })
 
 peer.on('connection', function (connection) {
@@ -48,23 +51,23 @@ peer.on('connection', function (connection) {
 })
 
 peer.on('error', function (err) {
-  alert('an error has happened:' + err)
+  window.alert('an error has happened:' + err)
   console.log(err)
 })
 
-document.querySelector('#conn_button').addEventListener('click', function () {
-  peerid = document.querySelector('#connId').value
+// document.querySelector('#conn_button').addEventListener('click', function () {
+//   peerid = document.querySelector('#connId').value
 
-  if (peerid) {
-    conn = peer.connect(peerid)
-  } else {
-    alert('enter an id')
-    return false
-  }
-})
+//   if (peerid) {
+//     conn = peer.connect(peerid)
+//   } else {
+//     window.alert('enter an id')
+//     return false
+//   }
+// })
 
 peer.on('call', function (call) {
-  var acceptCall = confirm('Do you want to answer this call?')
+  var acceptCall = window.confirm('Do you want to answer this call?')
 
   if (acceptCall) {
     call.answer(window.localStream)
@@ -75,7 +78,7 @@ peer.on('call', function (call) {
       recStream(stream, '#rVideo')
     })
     call.on('close', function () {
-      alert('the call has ended')
+      window.alert('the call has ended')
     })
   } else {
     console.log('call denied')
@@ -83,7 +86,15 @@ peer.on('call', function (call) {
 })
 
 document.querySelector('#call_button').addEventListener('click', function () {
-  console.log('calling a peer' + peerid)
+  peerid = document.querySelector('#connId').value
+  // document.querySelector('.row').style.visibility = 'visible'
+  if (peerid) {
+    conn = peer.connect(peerid)
+  } else {
+    window.alert('enter an id')
+    return false
+  }
+  console.log('calling a peer ' + peerid)
   console.log(peer)
 
   var call = peer.call(peerid, window.localStream)

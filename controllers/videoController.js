@@ -1,7 +1,10 @@
 const videoController = {}
 
 videoController.getVideo = (req, res) => {
-  res.render('videoChat')
+  const sessuser = req.session.user
+  // const io = req.app.get('socketio')
+  // io.emit('videoChat', req.body)
+  res.render('videoChat', { title: 'video Chat', sessuser })
 }
 
 module.exports = videoController

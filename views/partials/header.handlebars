@@ -3,6 +3,7 @@
     <ul>
 {{#if sessuser}}
         <li><a href="/profile">Colleagues</a> </li>
+        <li class="menu"><a href="/videoChat">Chatta</a> </li>
         {{else}}
         <li><a href="/">Colleagues</a> </li>
         <li class="menu"><a href="/register">Registrera dig här</a> </li>
@@ -18,4 +19,13 @@
 </form>
 </div>
 {{/if}}
-</header>
+
+{{#if profiles}}
+
+<form id="search" action="/profiles/{{username}}" method="POST">
+<input id="searchfield" name="search" placeholder="Sök efter en användare...">
+<input id="search-btn" type="submit" value="Sök">
+<input type="hidden" name="_csrf" value="{{csrfToken}}">
+</form>
+
+{{/if}}
