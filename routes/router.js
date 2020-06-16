@@ -12,6 +12,8 @@ const video = require('../controllers/videoController')
 
 router.get('/videoChat', video.getVideo)
 
+router.get('/textChat', video.getText)
+
 router.get('/register', notSignedIn, authenticate.getregister)
 
 router.post('/register', notSignedIn, authenticate.register)
