@@ -57,7 +57,7 @@ const hbs = handlebar.create({
 app.engine('handlebars', hbs.engine)
 app.set('view engine', 'handlebars')
 
-const port = process.env.PORT || '9000'
+const port = process.env.PORT || '3000'
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.set('socketio', io)
