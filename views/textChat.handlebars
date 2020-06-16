@@ -3,4 +3,7 @@
       <input type="text" id="message-input">
       <button type="submit" id="send-button">send</button>
     </form>
+    {{#if sessuser}}
+<input type="hidden" id="username" value="{{sessuser.username}}">
+{{/if}}
 <script src="js/chatt.js"></script>
