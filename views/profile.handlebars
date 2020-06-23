@@ -1,8 +1,4 @@
-{{!-- dropzone här --}}
-{{!-- <div id="profile">
-<form id="upload-widget" method="post" action="/upload" class="dropzone">
- <input type="hidden" name="_csrf" value="{{csrfToken}}">
-</form> --}}
+
 {{#if sessuser}}
 <h1>Välkommen {{sessuser.username}}</h1>
 <input type="hidden" id="username" value="{{sessuser.username}}">
@@ -10,7 +6,7 @@
 {{#if usersprofile}}
 
 {{#each usersprofile}}
-<img src="{{img}}" alt="profilepic">
+
 <p>Namn: {{name}}</p>
 <p>Ålder: {{age}} år</p>
     <form id="editbutton" action="/profile/aboutMe/{{id}}" method="GET">

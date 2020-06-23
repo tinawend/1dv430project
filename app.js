@@ -6,9 +6,6 @@ const io = require('socket.io')(server)
 const handlebar = require('express-handlebars')
 const session = require('express-session')
 const router = require('./routes/router')
-// var multer = require('multer')
-// var upload = multer()
-// const { ExpressPeerServer } = require('peer')
 const csrf = require('csurf')
 
 require('dotenv').config()
@@ -27,28 +24,10 @@ db.once('open', function () {
 db.on('connected', () => {
   console.log('Opened conection')
 })
-// dropzone här
-// const peerServer = ExpressPeerServer(server, {
-//   debug: true,
-//   path: '/myapp'
-// })
 
 // app.use('/peerjs', peerServer)
-// app.use(multer({ dest: './uploads/' }).single('img'))
-
-// var storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, 'uploads')
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, file.fieldname + '-' + Date.now())
-//   }
-// })
-
-// var upload = multer({ storage: storage })
 
 app.use(express.static('public'))
-// app.use('/scripts', express.static(`${__dirname}/node_modules/`))
 
 const hbs = handlebar.create({
   defaultLayout: 'main'
@@ -69,7 +48,7 @@ app.use(session({
   secret: 'eiidnnkjnjbhgvhvj',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false }
+  cookie: { secure: true }
 }))
 
 app.use(csrf())

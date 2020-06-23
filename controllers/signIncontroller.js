@@ -39,7 +39,11 @@ authenticate.getLogin = async (req, res) => {
   const profiles = allProfiles.map(users => ({
     username: users.username
   }))
-  res.render('index', { title: 'home', sessuser, profiles })
+  if (sessuser) {
+    res.redirect('/profile')
+  } else {
+    res.render('index', { title: 'home', sessuser, profiles })
+  }
 }
 
 authenticate.login = async (req, res) => {

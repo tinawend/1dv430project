@@ -2,6 +2,13 @@
 <nav>
     <ul>
 {{#if sessuser}}
+        <div id="signout">
+        <form action="/logout" method="POST">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <button type="submit" >Sign out</button>
+        </form>
+        </div>
+        
         <li><a href="/profile">Colleagues</a> </li>
         <li class="menu"><a href="/videoChat">Video Chatta</a> </li>
         <li class="menu"><a href="/textChat">Chatta</a> </li>
@@ -12,14 +19,6 @@
     </ul>
 </nav>
 
-{{#if sessuser}}
-<div id="signout">
-<form action="/logout" method="POST">
-<input type="hidden" name="_csrf" value="{{csrfToken}}">
-<button type="submit" >Sign out</button>
-</form>
-</div>
-{{/if}}
 
 {{#if profiles}}
 

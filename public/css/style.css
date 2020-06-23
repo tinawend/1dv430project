@@ -48,6 +48,7 @@ nav	a:hover, nav a:active {
 #signout{
     margin-right: 50px;
     float: right;
+   
 }
 #signout button {
     background: none;
@@ -245,4 +246,66 @@ height: 200px;
     text-align:center;
   }
 
+  #message-input {
+    text-align: left;
+    font-size: 20px;
+    margin: auto;
+    width: 500px;
+    height: 80px;
+    border: 5px inset rgba(0, 0, 0, 0.521);
+    border-radius: 5px 5px 5px 5px;
+  }
 
+  #message-container{
+    text-align: left;
+    font-size: 20px;
+    margin: auto;
+    width: 500px;
+    height: 300px;
+    background-color: pink;
+    border: 5px inset rgba(82, 80, 80, 0.733);
+    border-radius: 10px 10px 10px 10px;
+    overflow-wrap: break-word;
+    overflow: auto;
+    margin-bottom: 10px;
+    /* resize: both; */
+  }
+
+  #message-container div{
+margin-left: 15px;
+  }
+#send-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ff5bb0;
+  font-size: 20px;  
+  outline:none;
+}
+#send-button:hover {
+	color:  rgba(82, 80, 80, 0.733);
+}
+#send-button:active {
+	position:relative;
+	top:1px;
+} 
+
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-resizer {
+  border-radius: 30px 0px 0px 0px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+
+}

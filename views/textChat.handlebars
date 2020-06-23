@@ -1,6 +1,11 @@
     <div id="message-container"></div>
     <form id="send-container">
-      <input type="text" id="message-input">
+        <div class="md-form">
+      <textarea type="text" id="message-input" class="md-textarea form-control" rows="3"></textarea>
+      </div>
+
+      
+      
       <button type="submit" id="send-button">send</button>
     </form>
     {{#if sessuser}}

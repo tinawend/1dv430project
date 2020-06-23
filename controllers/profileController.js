@@ -1,12 +1,5 @@
 const Profile = require('../models/profile')
 
-// const path = require('path')
-// const uploadPath = path.join('public', Profile.coverImageBasePath)
-// var multer = require('multer')
-// const upload = multer({
-//     dest:
-// })
-
 const profileController = {}
 
 profileController.getMyProfile = async (req, res) => {
@@ -61,17 +54,6 @@ profileController.updateProfile = async (req, res) => {
   res.redirect('/profile')
 }
 
-profileController.getUserProfiles = async (req, res) => {
-  const allProfiles = await Profile.find({})
-  const profiles = allProfiles.map(users => ({
-    img: users.img,
-    username: users.username,
-    name: users.name,
-    age: users.age
-
-  }))
-  res.render('publicProfile', { profiles })
-}
 profileController.searchProfiles = async (req, res) => {
   // const oneProfiles = await Profile.findOne({ username: req.query.search })
   console.log(req.body.search)
