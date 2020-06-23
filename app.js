@@ -28,12 +28,6 @@ db.on('connected', () => {
 
 // app.use('/peerjs', peerServer)
 app.use(helmet())
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'self'"],
-    styleSrc: ["'self'"]
-  }
-}))
 app.use(express.static('public'))
 
 const hbs = handlebar.create({

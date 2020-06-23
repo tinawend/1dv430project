@@ -1,3 +1,5 @@
+'use strict'
+
 const User = require('../models/users')
 // var assert = require('assert')
 const mongoose = require('mongoose')
@@ -22,7 +24,7 @@ describe('#find()', function () {
   })
 })
 
-describe('#find()1', function () {
+describe('find a correct user', function () {
   it('should be correct sign in', async function () {
     const user = await User.findOne({ username: 'Gunnel' })
     if (!user) {

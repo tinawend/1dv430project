@@ -28,8 +28,8 @@ router.get('/profile/aboutMe/:id', loggedIn, profile.editProfile)
 
 router.post('/profile/aboutMe/:id', loggedIn, profile.updateProfile)
 
-router.post('/profiles', loggedIn, profile.searchProfiles)
+router.post('/profiles', profile.searchProfiles)
 
-router.get('/profiles/:id', loggedIn, profile.getUserProfile)
+router.get('/profiles/:id', profile.getUserProfile)
 
 module.exports = router

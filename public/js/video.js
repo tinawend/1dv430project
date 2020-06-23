@@ -1,9 +1,5 @@
 
-// const socket = window.io()
-// // var Peer
-// socket.on('message', function (message) {
-//   console.log('The server has a message for you: ' + message)
-// })
+var Peer
 
 function getLVideo (callbacks) {
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia
