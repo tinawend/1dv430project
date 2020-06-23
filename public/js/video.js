@@ -55,17 +55,6 @@ peer.on('error', function (err) {
   console.log(err)
 })
 
-// document.querySelector('#conn_button').addEventListener('click', function () {
-//   peerid = document.querySelector('#connId').value
-
-//   if (peerid) {
-//     conn = peer.connect(peerid)
-//   } else {
-//     window.alert('enter an id')
-//     return false
-//   }
-// })
-
 peer.on('call', function (call) {
   var acceptCall = window.confirm('Do you want to answer this call?')
 

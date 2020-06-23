@@ -7,6 +7,7 @@ const handlebar = require('express-handlebars')
 const session = require('express-session')
 const router = require('./routes/router')
 const csrf = require('csurf')
+const helmet = require('helmet')
 
 require('dotenv').config()
 mongoose.connect(`${process.env.DB_LINK}`,
@@ -26,7 +27,13 @@ db.on('connected', () => {
 })
 
 // app.use('/peerjs', peerServer)
-
+app.use(helmet())
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    styleSrc: ["'self'"]
+  }
+}))
 app.use(express.static('public'))
 
 const hbs = handlebar.create({
@@ -48,7 +55,7 @@ app.use(session({
   secret: 'eiidnnkjnjbhgvhvj',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: true }
+  cookie: { secure: false }
 }))
 
 app.use(csrf())
