@@ -20,7 +20,7 @@ describe('#find()', function () {
     const users = await User.find()
     console.log(users.length)
     // return users.should.have.length(6)
-    expect(users.length).to.equal(6)
+    expect(users.length).to.equal(7)
   })
 })
 
@@ -40,5 +40,14 @@ describe('find a correct user', function () {
       expect(compare).to.equal(true)
       expect(user.username).to.equal('Gunnel')
     }
+  })
+})
+
+describe('User', function () {
+  describe('#save()', function () {
+    it('should save without error', function (done) {
+      var user = new User({ username: 'Inger', password: 'password123' })
+      user.save(done)
+    })
   })
 })

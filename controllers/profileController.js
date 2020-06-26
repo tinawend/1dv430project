@@ -1,4 +1,5 @@
 const Profile = require('../models/profile')
+const User = require('../models/users')
 
 const profileController = {}
 
@@ -10,7 +11,6 @@ profileController.getMyProfile = async (req, res) => {
   }))
   const editprofile = await Profile.find({ username: req.session.user.username })
   const usersprofile = editprofile.map(profile => ({
-    img: profile.img,
     name: profile.name,
     age: profile.age,
     id: profile._id
@@ -56,7 +56,7 @@ profileController.updateProfile = async (req, res) => {
 
 profileController.searchProfiles = async (req, res) => {
   // const oneProfiles = await Profile.findOne({ username: req.query.search })
-  console.log(req.body.search)
+  // console.log(req.body.search)
   res.redirect('/profiles/' + req.body.search)
 }
 
@@ -66,19 +66,23 @@ profileController.getUserProfile = async (req, res) => {
   const profiles = allProfiles.map(users => ({
     username: users.username
   }))
-  const oneProfiles = await Profile.findOne({ username: req.params.id })
-  // const search = document.querySelector('#search').value
-  // if (search === oneProfiles) {
-
+  try {
+    const oneProfiles = await Profile.findOne({ username: req.params.id })
+    // console.log(oneProfiles.username)
+    // if (oneProfiles.username === req.params.id) {
+    res.render('publicProf', { user: oneProfiles.username, name: oneProfiles.name, age: oneProfiles.age, profiles, sessuser })
+  } catch (error) {
+    // console.log(error)
+    try {
+      const oneUser = await User.findOne({ username: req.params.id })
+      res.render('publicProf', { username: oneUser.username, sessuser })
+    } catch (error) {
+      // console.log(error)
+      res.status(404).send('Not found')
+    }
+  }
+  // } else {
   // }
-  // const profiles = allProfiles.map(users => ({
-  //   username: users.username,
-  //   name: users.name,
-  //   age: users.age,
-  //   id: users.id
-
-  // }))
-  res.render('publicProf', { user: oneProfiles.username, name: oneProfiles.name, age: oneProfiles.age, profiles, sessuser })
 }
 
 module.exports = profileController
