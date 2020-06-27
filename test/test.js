@@ -15,15 +15,6 @@ before('set up test-environment', function (done) {
   done()
 })
 
-describe('#find()', function () {
-  it('responds with matching records', async function () {
-    const users = await User.find()
-    console.log(users.length)
-    // return users.should.have.length(6)
-    expect(users.length).to.equal(7)
-  })
-})
-
 describe('find a correct user', function () {
   it('should be correct sign in', async function () {
     const user = await User.findOne({ username: 'Gunnel' })

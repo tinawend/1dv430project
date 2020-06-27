@@ -35,7 +35,6 @@ var peer = new Peer(document.querySelector('#username').value)
 
 peer.on('open', function (req, res) {
   console.log(document.querySelector('#username'))
-  // document.querySelector('#username').value
   document.querySelector('#displayId').textContent = document.querySelector('#username').value
 })
 
@@ -72,7 +71,6 @@ peer.on('call', function (call) {
 
 document.querySelector('#call_button').addEventListener('click', function () {
   peerid = document.querySelector('#connId').value
-  // document.querySelector('.row').style.visibility = 'visible'
   if (peerid) {
     conn = peer.connect(peerid)
   } else {

@@ -1,10 +1,15 @@
 
-
+<div id="profile-set">
+<div id="prof-text">
 <form action="/profile/aboutMe/{{id}}" method="POST">
-<input id='name' name='name' placeholder='Name' value={{name}}>
+<input id='name' class="form-control" name='name' placeholder='Name' value={{name}}>
 <br>
-<input type="number" placeholder="Age" id='age' name='age' value={{age}}>
+<input type="number" class="form-control" placeholder="Age" id='age' name='age' value={{age}}>
+<br>
+<input id=' occupation' class="form-control" name=' occupation' placeholder=' occupation' value={{occupation}}>
 <br>
 <input type="hidden" name="_csrf" value="{{csrfToken}}">
-<button type="submit">Send</button>
+<button type="submit" class="save-button">Save</button>
 </form>
+</div>
+</div>
