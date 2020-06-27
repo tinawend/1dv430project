@@ -1,3 +1,3 @@
-Tids rapport, product backlog och vision hittas i wikin. 
+Samtlig information hittas i wikin nedan
 
-https://gitlab.lnu.se/1dv430/student/tw222eu/project/-/wikis/pages
+https://gitlab.lnu.se/1dv430/student/tw222eu/project/-/wikis/home
