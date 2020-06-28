@@ -4,9 +4,9 @@ const coverImageBasePath = 'uploads/bookCovers'
 
 const profileSchema = new Schema({
   img: { data: Buffer, contentType: String },
-  name: { type: String, required: true },
-  age: { type: Number, required: true },
-  occupation: { type: String, required: true },
+  name: { type: String },
+  age: { type: Number },
+  occupation: { type: String },
   username: { type: String }
 })
 
