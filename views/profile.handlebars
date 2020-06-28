@@ -25,11 +25,11 @@
 <div id="prof-text">
 
     <form id="addprofile" action="/profile" method="POST" >
-        <input id='name' class="form-control" name='name' placeholder='Name' type="text" required>
+        <input id='name' class="form-control" name='name' placeholder='Name' type="text">
         <br>
-        <input id='age' class="form-control" name='age' placeholder="Age" type="number" required>
+        <input id='age' class="form-control" name='age' placeholder="Age" type="number">
         <br>
-        <input id='occupation' class="form-control" name='occupation' placeholder="occupation" type="text" required>
+        <input id='occupation' class="form-control" name='occupation' placeholder="occupation" type="text">
         <br>
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <button type="submit" class="save-button">Save</button>
