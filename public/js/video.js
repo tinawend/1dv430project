@@ -1,4 +1,4 @@
-
+// Denna videochat har jag hämtat inspiration ifrån denna video https://www.youtube.com/watch?v=OOrBcpwelPY&t=2628s
 var Peer
 
 function getLVideo (callbacks) {

@@ -1,5 +1,4 @@
 'use strict'
-
 const User = require('../models/users')
 // var assert = require('assert')
 const mongoose = require('mongoose')

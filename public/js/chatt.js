@@ -1,4 +1,5 @@
 const socket = window.io()
+// Chatten har jag hämtat inspiration ifrån fler olika youtube videos och exempel.
 
 const messageContainer = document.getElementById('message-container')
 const messageForm = document.getElementById('send-container')
