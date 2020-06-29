@@ -1,5 +1,49 @@
-// Not in use!!!
+// Not in use!!!!
+// Försök till gruppchat
 
+// app.js
+// io.on('connection', (socket) => {
+//   // //! callback function after connection is made to the client
+//   // console.log('user' + socket.id)
+//   // // recieves a chat event, then sends the data to other sockets
+//   // socket.on('userMessage', (data) => {
+//   //   io.sockets.emit('userMessage', data)
+//   // })
+//   socket.emit('chat-message', 'Hello world')
+// })
+
+// io.on('connection', (socket) => {
+//   console.log('a user conected')
+//   socket.on('create or join', function (room) {
+//     console.log('create or join to room', room)
+//     var myRoom = io.sockets.adapter.rooms[room] || { length: 0 }
+//     var numClients = myRoom.length
+//     console.log(room, 'has', numClients, 'clients')
+//     if (numClients === 0) {
+//       socket.join(room)
+//       socket.emit('created', room)
+//     } else if (numClients >= 1) {
+//       socket.join(room)
+//       socket.emit('joined', room)
+//     } else { socket.emit('full', room) }
+//   })
+
+//   socket.on('ready', function (room) {
+//     socket.broadcast.to(room).emit('ready')
+//   })
+//   socket.on('candidate', function (event) {
+//     socket.broadcast.to(event.room).emit('candidate', event)
+//   })
+
+//   socket.on('offer', function (event) {
+//     socket.broadcast.to(event.room).emit('offer', event.sdp)
+//   })
+//   socket.on('answer', function (event) {
+//     socket.broadcast.to(event.room).emit('answer', event.sdp)
+//   })
+// })
+
+// Videos.js
 // const socket = window.io()
 
 // var divSelectRoom = document.querySelector('#selectRoom')

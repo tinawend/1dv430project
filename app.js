@@ -26,7 +26,6 @@ db.on('connected', () => {
   console.log('Opened conection')
 })
 
-// app.use('/peerjs', peerServer)
 app.use(helmet())
 app.use(express.static('public'))
 
@@ -64,16 +63,6 @@ app.use('/', router)
 app.set('port', port)
 server.listen(port, () => console.log(`API running on localhost:${port}`))
 
-// io.on('connection', (socket) => {
-//   // // callback function after connection is made to the client
-//   // console.log('user' + socket.id)
-//   // // recieves a chat event, then sends the data to other sockets
-//   // socket.on('userMessage', (data) => {
-//   //   io.sockets.emit('userMessage', data)
-//   // })
-//   socket.emit('chat-message', 'Hello world')
-// })
-
 const users = {}
 
 io.on('connection', socket => {
@@ -89,37 +78,6 @@ io.on('connection', socket => {
     delete users[socket.id]
   })
 })
-
-// io.on('connection', (socket) => {
-//   console.log('a user conected')
-//   socket.on('create or join', function (room) {
-//     console.log('create or join to room', room)
-//     var myRoom = io.sockets.adapter.rooms[room] || { length: 0 }
-//     var numClients = myRoom.length
-//     console.log(room, 'has', numClients, 'clients')
-//     if (numClients === 0) {
-//       socket.join(room)
-//       socket.emit('created', room)
-//     } else if (numClients >= 1) {
-//       socket.join(room)
-//       socket.emit('joined', room)
-//     } else { socket.emit('full', room) }
-//   })
-
-//   socket.on('ready', function (room) {
-//     socket.broadcast.to(room).emit('ready')
-//   })
-//   socket.on('candidate', function (event) {
-//     socket.broadcast.to(event.room).emit('candidate', event)
-//   })
-
-//   socket.on('offer', function (event) {
-//     socket.broadcast.to(event.room).emit('offer', event.sdp)
-//   })
-//   socket.on('answer', function (event) {
-//     socket.broadcast.to(event.room).emit('answer', event.sdp)
-//   })
-// })
 
 app.use((req, res, next) => {
   res.status(404).send('Not found')

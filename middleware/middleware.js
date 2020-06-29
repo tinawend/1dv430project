@@ -8,10 +8,8 @@
  */
 function isUserLoggedIn (req, res, next) {
   if (req.session.user) {
-    // res.render('index')
     return next()
   } else {
-    // throw new Error('Not authenticated')
     res.status(403)
     res.send('Not authenticated')
   }
@@ -29,7 +27,6 @@ function notAlreadyLogged (req, res, next) {
   if (req.session.user === undefined) {
     return next()
   } else {
-    // throw new Error('Already signed in')
     res.status(403)
     res.send('Already signed in')
   }
