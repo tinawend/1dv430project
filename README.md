@@ -1,3 +1,2 @@
-Samtlig information hittas i wikin nedan
+Sidan finns tillgänglig: https://colleagues1dv430.herokuapp.com/
 
-https://gitlab.lnu.se/1dv430/student/tw222eu/project/-/wikis/home
